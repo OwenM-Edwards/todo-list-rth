@@ -61,6 +61,10 @@ Make sure you have the following installed:
 
     The app should now be accessible, and you can start interacting with it.
 
+4. **Create an account**:
+
+    You can create a quick account with any fake email (there are no emails sent/email verification etc)
+
 ---
 
 ## Project Structure
