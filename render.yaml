@@ -1,0 +1,73 @@
+services:
+  # Backend service (Laravel)
+  - name: backend
+    type: web
+    env: php
+    dockerfilePath: ./backend/Dockerfile
+    plan: free  # Choose your desired plan (free, starter, pro, etc.)
+    buildCommand: |
+      composer install
+      php artisan migrate --force
+    startCommand: apache2-foreground  # or your backend start command
+    envVars:
+      - key: APP_ENV
+        value: local
+      - key: APP_DEBUG
+        value: true
+      - key: APP_KEY
+        value: <your-app-key>  # Set your Laravel app key here
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: mysql-db  # Name of your db service
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_DATABASE
+        value: todo_db
+      - key: DB_USERNAME
+        value: root
+      - key: DB_PASSWORD
+        value: root
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/var/www/html
+
+  # Database service (MySQL)
+  - name: mysql-db
+    type: db
+    plan: free  # Adjust the plan as needed
+    database: mysql
+    envVars:
+      - key: MYSQL_DATABASE
+        value: todo_db
+      - key: MYSQL_ROOT_PASSWORD
+        value: root
+      - key: MYSQL_PASSWORD
+        value: password
+      - key: MYSQL_USER
+        value: todo_user
+
+  # Frontend service (React)
+  - name: frontend
+    type: web
+    env: node
+    dockerfilePath: ./frontend/Dockerfile
+    plan: free  # Choose your desired plan
+    buildCommand: |
+      npm install
+      npm run build
+    startCommand: npm run start  # Or whatever command you use to start the React app
+    envVars:
+      - key: NODE_ENV
+        value: development
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    dependsOn:
+      - backend
+
