@@ -41,7 +41,8 @@ const LoginForm = () => {
       if (isRegister) {
         // Register user
         const registerRes = await registerUser(data.email, data.password, data.confirmPassword);
-        userData = await getUser();
+        alert("User registered");
+        setIsLoading(false);
       } else {
         // Login user
         const loginRes = await loginUser(data.email, data.password);
