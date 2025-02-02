@@ -57,7 +57,6 @@ Make sure you have the following installed:
 3. **Access the application**:
 
     - **Frontend**: Open `http://localhost:3000` in your browser.
-    - **Backend**: The backend API will be available at `http://localhost:5000`.
 
     The app should now be accessible, and you can start interacting with it.
 
@@ -66,6 +65,3 @@ Make sure you have the following installed:
     You can create a quick account with any fake email (there are no emails sent/email verification etc)
 
 ---
-
-## Project Structure
-
