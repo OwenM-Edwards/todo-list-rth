@@ -1,4 +1,4 @@
-# Todo App - Fullstack (React + Node.js)
+# Todo App - Fullstack (React + Laravel)
 
 ## Project Overview
 
