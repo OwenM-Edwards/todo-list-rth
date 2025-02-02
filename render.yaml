@@ -1,17 +1,16 @@
 version: '1'
 
 services:
-  backend:
-    name: laravel-backend
+  - name: laravel-backend
     type: web
     env: docker
     build:
       context: ./backend
-      dockerfilePath: ./backend/Dockerfile  
+      dockerfilePath: ./backend/Dockerfile 
     environment:
       - APP_ENV=local
       - APP_DEBUG=true
-      - APP_KEY=  
+      - APP_KEY= 
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
@@ -23,8 +22,7 @@ services:
     depends_on:
       - db
 
-  db:
-    name: mysql-db
+  - name: mysql-db
     type: database
     image: mysql:8
     environment:
@@ -43,17 +41,16 @@ services:
       start_period: 30s
       timeout: 10s
 
-  frontend:
-    name: react-frontend
+  - name: react-frontend
     type: web
     env: docker
     build:
       context: ./frontend
-      dockerfilePath: ./frontend/Dockerfile 
+      dockerfilePath: ./frontend/Dockerfile  
     ports:
       - "3000:3000"
     depends_on:
-      - backend
+      - laravel-backend
 
 volumes:
   db-data:
