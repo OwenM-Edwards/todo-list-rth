@@ -1,4 +1,4 @@
-# Todo App - Fullstack (React + Node.js)
+# Todo App - Fullstack (React + Laravel)
 
 ## Project Overview
 
@@ -60,6 +60,10 @@ Make sure you have the following installed:
     - **Backend**: The backend API will be available at `http://localhost:5000`.
 
     The app should now be accessible, and you can start interacting with it.
+
+4. **Create an account**:
+
+    You can create a quick account with any fake email (there are no emails sent/email verification etc)
 
 ---
 
