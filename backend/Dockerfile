@@ -19,10 +19,7 @@ COPY . .
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install
-
-# Run migrations
-RUN php artisan migrate --force
+RUN composer install --no-interaction --prefer-dist
 
 # Update the Apache configuration
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
@@ -33,6 +30,7 @@ RUN echo '</Directory>' >> /etc/apache2/sites-available/000-default.conf
 
 # Change permissions for Laravel storage and cache
 RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 775 /var/www/html
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
